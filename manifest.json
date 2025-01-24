@@ -1,0 +1,31 @@
+{
+    "manifest_version": 3,
+    "name": "ICS to Google Tasks Sync",
+    "description": "Synchronize iCalendar events with Google Tasks in real-time.",
+    "version": "1.0",
+    "permissions": [
+      "identity",
+      "storage",
+      "activeTab",
+      "scripting"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+      }
+    },
+    "oauth2": {
+      "client_id": "YOUR_OAUTH2_CLIENT_ID",
+      "scopes": [
+        "https://www.googleapis.com/auth/tasks",
+        "https://www.googleapis.com/auth/calendar.readonly"
+      ]
+    }
+  }
+  
