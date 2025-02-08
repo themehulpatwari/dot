@@ -33,3 +33,13 @@ jspm_packages/
 *.ntvs*
 *.njsproj
 *.sln
+
+# Credentials and config
+config.js
+
+# Build files
+dist/
+build/
+
+# IDE files
+*.swp
