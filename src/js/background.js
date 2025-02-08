@@ -1,4 +1,5 @@
-import config from './config.js';
+import config from '../../config/config.js';
+import ICAL from "https://unpkg.com/ical.js/dist/ical.min.js";
 
 async function authenticate() {
   const authResult = await chrome.identity.getAuthToken({ 
@@ -35,39 +36,8 @@ async function syncIcsToGoogleTasks(icsUrl) {
 
 // Function to parse ICS data (implement parsing logic here)
 function parseIcsData(icsData) {
-  const events = [];
-  const lines = icsData.split('\n');
-  let currentEvent = null;
-
-  for (let line of lines) {
-    line = line.trim();
-    
-    if (line === 'BEGIN:VEVENT') {
-      currentEvent = {};
-    } else if (line === 'END:VEVENT') {
-      if (currentEvent) {
-        events.push(currentEvent);
-      }
-      currentEvent = null;
-    } else if (currentEvent && line) {
-      const [key, ...values] = line.split(':');
-      const value = values.join(':');
-      
-      switch (key) {
-        case 'SUMMARY':
-          currentEvent.summary = value;
-          break;
-        case 'DESCRIPTION':
-          currentEvent.description = value;
-          break;
-        case 'DTSTART':
-          currentEvent.start = new Date(value).toISOString();
-          break;
-      }
-    }
-  }
-
-  return events;
+    ICAL.parse(icsData);
+    console.log(icsData);
 }
 
 // Function to create a Google Task
